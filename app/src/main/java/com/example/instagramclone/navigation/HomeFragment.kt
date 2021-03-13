@@ -54,7 +54,8 @@ class HomeFragment : Fragment(), View.OnClickListener {
                 Log.e(TAG, "onResponse: ${response.raw()}")
             }
             override fun onFailure(call: Call<NetworkResult<List<PostDTO>>>, t: Throwable) {
-                Log.e(TAG, "onResponse: ${t.toString()}", )
+                Log.e(TAG, "fail")
+                Log.e(TAG, "onResponse: ${t.toString()}")
             }
         })
     }
