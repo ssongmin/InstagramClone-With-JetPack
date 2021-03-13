@@ -18,11 +18,11 @@ import java.util.concurrent.TimeUnit
 object RetrofitClient {
     // 래트로핏 클라이언트 선언
 
-    private lateinit var retrofitClient: Retrofit
+    private var retrofitClient: Retrofit? = null
 
     //레트로핏 클라이언트 가져오기
     fun getClient(baseUrl: String): Retrofit? {
-        Log.d(TAG, "getClient: ")
+        Log.d(TAG, "getClient: $baseUrl")
 
 
         if (retrofitClient == null) {

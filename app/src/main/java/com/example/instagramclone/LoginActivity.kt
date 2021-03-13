@@ -44,6 +44,10 @@ class LoginActivity : AppCompatActivity(), View.OnClickListener {
                 }
             }
     }
+    override fun onStart() {
+        super.onStart()
+        moveMainPage(auth?.currentUser)
+    }
 
     fun signInEmail() {
         auth?.signInWithEmailAndPassword(mBinding?.loginactivityEmailEditText?.text.toString(), mBinding?.loginactivityPwdEditText?.text.toString())

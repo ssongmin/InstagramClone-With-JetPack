@@ -1,6 +1,7 @@
 package com.example.instagramclone.retrofit.service
 
 import com.example.instagramclone.model.PostDTO
+import com.example.instagramclone.retrofit.NetworkResult
 import com.example.instagramclone.utils.API
 import retrofit2.Call
 import retrofit2.http.Field
@@ -11,7 +12,7 @@ import retrofit2.http.POST
 interface PostService {
 
     @GET(API.GET_POSTS)
-    fun getPosts() : Call<PostDTO>
+    fun getPosts() : Call<NetworkResult<List<PostDTO>>>
 
     @POST("tset")
     @FormUrlEncoded

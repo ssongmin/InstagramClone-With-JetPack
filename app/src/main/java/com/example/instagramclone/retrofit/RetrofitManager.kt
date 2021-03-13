@@ -24,15 +24,15 @@ class RetrofitManager {
             it
         }?: return
 
-        call.enqueue(object : retrofit2.Callback<PostDTO> {
-            override fun onResponse(call: Call<PostDTO>, response: Response<PostDTO>) {
-                Log.d(TAG, "onResponse: called / response : ${response.body()}")
-                completion(RESPONSE_STATE.OKAY, response.body().toString())
-            }
-
-            override fun onFailure(call: Call<PostDTO>, t: Throwable) {
-                completion(RESPONSE_STATE.FAIL, t.toString())
-            }
-        })
+//        call.enqueue(object : retrofit2.Callback<PostDTO> {
+//            override fun onResponse(call: Call<PostDTO>, response: Response<PostDTO>) {
+//                Log.d(TAG, "onResponse: called / response : ${response.body()}")
+//                completion(RESPONSE_STATE.OKAY, response.body().toString())
+//            }
+//
+//            override fun onFailure(call: Call<PostDTO>, t: Throwable) {
+//                completion(RESPONSE_STATE.FAIL, t.toString())
+//            }
+//        })
     }
 }
