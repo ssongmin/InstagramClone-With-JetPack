@@ -2,9 +2,12 @@ package com.example.instagramclone
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import androidx.activity.viewModels
+import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.NavigationUI
 import com.example.instagramclone.databinding.ActivityMainBinding
+import com.example.instagramclone.viewmodel.HomeViewModel
 
 class MainActivity : AppCompatActivity() {
 

@@ -6,25 +6,18 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import com.example.instagramclone.R
+import androidx.fragment.app.viewModels
+import androidx.lifecycle.Observer
+import androidx.lifecycle.ViewModel
+import androidx.lifecycle.ViewModelProvider
 import com.example.instagramclone.databinding.FragmentHomeBinding
-import com.example.instagramclone.model.PostDTO
-import com.example.instagramclone.retrofit.NetworkResult
-import com.example.instagramclone.retrofit.RetrofitClient
-import com.example.instagramclone.retrofit.service.PostService
-import com.example.instagramclone.utils.API
 import com.example.instagramclone.utils.Constants.TAG
-import retrofit2.Call
-import retrofit2.Callback
-import retrofit2.Response
+import com.example.instagramclone.viewmodel.HomeViewModel
 
 class HomeFragment : Fragment(), View.OnClickListener {
     private var fragmentHomeBinding: FragmentHomeBinding? = null;
-
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-
-    }
+//    private val homeViewModel: HomeViewModel by viewModels()
+    private lateinit var homeViewModel: HomeViewModel
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -37,27 +30,31 @@ class HomeFragment : Fragment(), View.OnClickListener {
         fragmentHomeBinding = binding
 
         fragmentHomeBinding?.homeTestBtn?.setOnClickListener(this)
-
+        homeViewModel = ViewModelProvider(this).get(HomeViewModel::class.java)
+        subscribeObservers()
         return  fragmentHomeBinding!!.root
     }
 
-    override fun onClick(v: View?) {
-        var server = RetrofitClient.getClient(API.BASE_URL)?.create(PostService::class.java)
-
-        server?.getPosts()?.enqueue(object : Callback<NetworkResult<List<PostDTO>>>{
-            override fun onResponse(
-                call: Call<NetworkResult<List<PostDTO>>>,
-                response: Response<NetworkResult<List<PostDTO>>>
-            ) {
-                Log.e(TAG, "success")
-                Log.e(TAG, "onResponse: ${response.body()}")
-                Log.e(TAG, "onResponse: ${response.raw()}")
-            }
-            override fun onFailure(call: Call<NetworkResult<List<PostDTO>>>, t: Throwable) {
-                Log.e(TAG, "fail")
-                Log.e(TAG, "onResponse: ${t.toString()}")
-            }
+    private fun subscribeObservers() {
+        homeViewModel.postList.observe(viewLifecycleOwner, Observer {
+            Log.e(TAG, "!!!", )
+//            Log.e(TAG, "subscribeObservers: ${it.size}",)
         })
+
+        homeViewModel.testInt.observe(viewLifecycleOwner, Observer {
+            Log.e(TAG, "subscribeObservers: $it")
+        })
+    }
+
+    override fun onResume() {
+        super.onResume()
+        homeViewModel.getPostList()
+    }
+
+    var testInt: Int = 1;
+    override fun onClick(v: View?) {
+        testInt++
+        homeViewModel.setInt(testInt)
     }
 
     companion object {

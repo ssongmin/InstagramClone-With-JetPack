@@ -1,6 +1,8 @@
 plugins {
     id 'com.android.application'
     id 'kotlin-android'
+    id 'kotlin-android-extensions'
+    id 'kotlin-kapt'
     id 'androidx.navigation.safeargs.kotlin'
     id 'com.google.gms.google-services'
 }
@@ -63,11 +65,12 @@ dependencies {
     implementation "com.squareup.retrofit2:retrofit:$retrofit_version"
     // gson 컨버터
     implementation "com.squareup.retrofit2:converter-gson:$retrofit_version"
+    implementation 'com.google.code.gson:gson:2.8.5'
 
     // 레트로핏 로깅 인터셉터
     implementation "com.squareup.okhttp3:logging-interceptor:4.8.1"
 
-    def lifecycle_version = "2.3.0"
+    def lifecycle_version = "2.1.0"
     //뷰모델 - 라이프사이클 관련
     // ViewModel
     implementation "androidx.lifecycle:lifecycle-viewmodel-ktx:$lifecycle_version"

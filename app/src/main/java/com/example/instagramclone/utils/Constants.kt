@@ -10,7 +10,7 @@ enum class RESPONSE_STATE {
 }
 
 object  API {
-    const val BASE_URL : String = "http://1efc047e4ce7.ngrok.io"
+    const val BASE_URL : String = "http://3c93733d44f3.ngrok.io"
 
     const val GET_POSTS : String = "postList"
 }

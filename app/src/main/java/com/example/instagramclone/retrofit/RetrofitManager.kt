@@ -20,9 +20,9 @@ class RetrofitManager {
     fun getPosts(completion: (RESPONSE_STATE, String) -> Unit){
 
         //call null 이면 return
-        val call = iRetrofit?.getPosts().let {
-            it
-        }?: return
+//        val call = iRetrofit?.getPosts().let {
+//            it
+//        }?: return
 
 //        call.enqueue(object : retrofit2.Callback<PostDTO> {
 //            override fun onResponse(call: Call<PostDTO>, response: Response<PostDTO>) {
