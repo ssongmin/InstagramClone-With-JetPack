@@ -40,7 +40,7 @@ class SearchFragment : Fragment() {
         fragmentSearchBinding = binding;
 
         searchViewModel = ViewModelProvider(this).get(SearchViewModel::class.java)
-
+        //Rx
         val editTextChangeObservable =  fragmentSearchBinding!!.searchfragmentTestEditText.textChanges()
 
         val searchEditTextSubscription : Disposable =
