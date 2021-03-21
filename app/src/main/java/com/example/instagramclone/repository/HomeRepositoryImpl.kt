@@ -46,9 +46,11 @@ class HomeRepositoryImpl constructor() : HomeRepository {
 ////                data = tempList
 //            }
 //        })
-        data.postValue(server?.getPosts()?.data)
 
-        Log.e(TAG, "getPostList: 11111", )
+        var postList = server?.getPosts()?.data
+
+        data.value= postList
+
         return data
     }
 }

@@ -6,9 +6,9 @@
     tools:context=".navigation.SearchFragment">
 
     <!-- TODO: Update blank fragment layout -->
-    <TextView
+    <EditText
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="searchFragment" />
+        android:layout_height="wrap_content"
+        android:id="@+id/searchfragment_test_edit_text"/>
 
 </FrameLayout>

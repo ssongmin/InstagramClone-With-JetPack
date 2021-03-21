@@ -34,15 +34,10 @@ class HomeViewModel : ViewModel() {
 
     fun getPostList() {
         viewModelScope.launch {
-            Log.e(Constants.TAG, "getPostList: 000", )
             val homeRepositoryImpl: HomeRepositoryImpl = HomeRepositoryImpl()
             val postList = homeRepositoryImpl.getPostList()
-            Log.e(Constants.TAG, "getPostList: 222", )
             withContext(Main) {
-                Log.e(Constants.TAG, "getPostList: 333", )
-//                _postList = postList
-                _postList.postValue(postList.value)
-                Log.e(Constants.TAG, "getPostList: 444", )
+                _postList.value= postList.value
             }
         }
     }

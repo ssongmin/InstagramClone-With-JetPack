@@ -1,33 +1,34 @@
 package com.example.instagramclone.navigation
 
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.lifecycle.ViewModelProvider
 import com.example.instagramclone.R
+import com.example.instagramclone.databinding.FragmentSearchBinding
+import com.example.instagramclone.utils.Constants.TAG
+import com.example.instagramclone.viewmodel.SearchViewModel
+import com.jakewharton.rxbinding4.widget.textChanges
+import io.reactivex.rxjava3.disposables.CompositeDisposable
+import io.reactivex.rxjava3.disposables.Disposable
+import io.reactivex.rxjava3.kotlin.subscribeBy
+import io.reactivex.rxjava3.schedulers.Schedulers
+import java.util.concurrent.TimeUnit
 
-// TODO: Rename parameter arguments, choose names that match
-// the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-private const val ARG_PARAM1 = "param1"
-private const val ARG_PARAM2 = "param2"
-
-/**
- * A simple [Fragment] subclass.
- * Use the [SearchFragment.newInstance] factory method to
- * create an instance of this fragment.
- */
 class SearchFragment : Fragment() {
-    // TODO: Rename and change types of parameters
-    private var param1: String? = null
-    private var param2: String? = null
+
+    private var fragmentSearchBinding: FragmentSearchBinding? = null
+    private lateinit var searchViewModel: SearchViewModel
+
+    //옵저버블 제거를 위해서
+    private var myCompositeDisposable = CompositeDisposable()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        arguments?.let {
-            param1 = it.getString(ARG_PARAM1)
-            param2 = it.getString(ARG_PARAM2)
-        }
+
     }
 
     override fun onCreateView(
@@ -35,26 +36,60 @@ class SearchFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_search, container, false)
+        val binding =  FragmentSearchBinding.inflate(inflater, container, false)
+        fragmentSearchBinding = binding;
+
+        searchViewModel = ViewModelProvider(this).get(SearchViewModel::class.java)
+
+        val editTextChangeObservable =  fragmentSearchBinding!!.searchfragmentTestEditText.textChanges()
+
+        val searchEditTextSubscription : Disposable =
+            editTextChangeObservable.debounce(800, TimeUnit.MILLISECONDS)
+                .subscribeOn(Schedulers.io())
+                .subscribeBy(
+                    onNext = {
+                        if(it.isNotEmpty()){
+                            Log.d(TAG, "onCreateView: RXRXRX onNext: $it")
+                            searchViewModel.searchPost(it.toString())
+                        }
+                    },
+                    onComplete = {
+                        Log.e(TAG, "onCreateView:  onComplete",)
+                    },
+                    onError = {
+                        Log.e(TAG, "onCreateView: onError", )
+                    },
+                )
+
+
+        subscribeObservers()
+        myCompositeDisposable.add(searchEditTextSubscription)
+        return  fragmentSearchBinding!!.root
+    }
+
+    private fun subscribeObservers() {
+        searchViewModel.postList.observe(viewLifecycleOwner, {
+            Log.e(TAG, "subscribeObservers: ${it.toString()}", )
+            Log.e(TAG, "subscribeObservers: ${it.size}",)
+        })
+    }
+
+    override fun onResume() {
+        super.onResume()
+        searchViewModel.defaultPostList()
+    }
+
+    override fun onDestroy() {
+        myCompositeDisposable.clear()
+        fragmentSearchBinding = null
+        super.onDestroy()
     }
 
     companion object {
-        /**
-         * Use this factory method to create a new instance of
-         * this fragment using the provided parameters.
-         *
-         * @param param1 Parameter 1.
-         * @param param2 Parameter 2.
-         * @return A new instance of fragment SearchFragment.
-         */
-        // TODO: Rename and change types and number of parameters
-        @JvmStatic
-        fun newInstance(param1: String, param2: String) =
-            SearchFragment().apply {
-                arguments = Bundle().apply {
-                    putString(ARG_PARAM1, param1)
-                    putString(ARG_PARAM2, param2)
-                }
-            }
+
+        fun newInstance(): SearchFragment{
+            return  SearchFragment()
+        }
+
     }
 }

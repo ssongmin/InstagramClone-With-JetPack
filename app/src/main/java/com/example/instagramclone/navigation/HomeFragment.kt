@@ -38,7 +38,8 @@ class HomeFragment : Fragment(), View.OnClickListener {
     private fun subscribeObservers() {
         homeViewModel.postList.observe(viewLifecycleOwner, Observer {
             Log.e(TAG, "!!!", )
-//            Log.e(TAG, "subscribeObservers: ${it.size}",)
+            Log.e(TAG, "subscribeObservers: ${it.size}")
+
         })
 
         homeViewModel.testInt.observe(viewLifecycleOwner, Observer {
@@ -61,5 +62,10 @@ class HomeFragment : Fragment(), View.OnClickListener {
         fun newInstance() : HomeFragment{
             return  HomeFragment()
         }
+    }
+
+    override fun onDestroy() {
+        fragmentHomeBinding = null
+        super.onDestroy()
     }
 }

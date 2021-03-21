@@ -26,4 +26,8 @@ class MainActivity : AppCompatActivity() {
 
         NavigationUI.setupWithNavController(mainBinding.mainBottomNav, navController)
     }
+
+    override fun onDestroy() {
+        super.onDestroy()
+    }
 }
