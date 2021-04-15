@@ -10,6 +10,7 @@ import androidx.lifecycle.ViewModelProvider
 import com.example.instagramclone.R
 import com.example.instagramclone.databinding.FragmentSearchBinding
 import com.example.instagramclone.utils.Constants.TAG
+import com.example.instagramclone.viewBindings
 import com.example.instagramclone.viewmodel.SearchViewModel
 import com.jakewharton.rxbinding4.widget.textChanges
 import io.reactivex.rxjava3.disposables.CompositeDisposable
@@ -18,9 +19,12 @@ import io.reactivex.rxjava3.kotlin.subscribeBy
 import io.reactivex.rxjava3.schedulers.Schedulers
 import java.util.concurrent.TimeUnit
 
-class SearchFragment : Fragment() {
+class SearchFragment : Fragment(R.layout.fragment_search) {
 
-    private var fragmentSearchBinding: FragmentSearchBinding? = null
+//    private var fragmentSearchBinding: FragmentSearchBinding? = null
+    private val fragmentSearchBinding by viewBindings(FragmentSearchBinding::bind)
+
+
     private lateinit var searchViewModel: SearchViewModel
 
     //옵저버블 제거를 위해서
@@ -36,8 +40,8 @@ class SearchFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
-        val binding =  FragmentSearchBinding.inflate(inflater, container, false)
-        fragmentSearchBinding = binding;
+//        val binding =  FragmentSearchBinding.inflate(inflater, container, false)
+//        fragmentSearchBinding = binding;
 
         searchViewModel = ViewModelProvider(this).get(SearchViewModel::class.java)
         //Rx
@@ -81,7 +85,7 @@ class SearchFragment : Fragment() {
 
     override fun onDestroy() {
         myCompositeDisposable.clear()
-        fragmentSearchBinding = null
+//        fragmentSearchBinding = null
         super.onDestroy()
     }
 

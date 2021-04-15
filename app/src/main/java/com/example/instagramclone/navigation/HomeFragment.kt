@@ -10,12 +10,17 @@ import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
+import com.example.instagramclone.R
 import com.example.instagramclone.databinding.FragmentHomeBinding
 import com.example.instagramclone.utils.Constants.TAG
+import com.example.instagramclone.viewBindings
 import com.example.instagramclone.viewmodel.HomeViewModel
+import kotlinx.android.synthetic.main.fragment_home.*
 
-class HomeFragment : Fragment(), View.OnClickListener {
-    private var fragmentHomeBinding: FragmentHomeBinding? = null;
+class HomeFragment : Fragment(R.layout.fragment_home), View.OnClickListener {
+//    private var fragmentHomeBinding: FragmentHomeBinding? = null;
+    private val fragmentHomeBinding by viewBindings(FragmentHomeBinding::bind)
+
 //    private val homeViewModel: HomeViewModel by viewModels()
     private lateinit var homeViewModel: HomeViewModel
 
@@ -26,10 +31,12 @@ class HomeFragment : Fragment(), View.OnClickListener {
         // Inflate the layout for this fragment
 //        return inflater.inflate(R.layout.fragment_home, container, false)
 
-        val binding = FragmentHomeBinding.inflate(inflater, container, false)
-        fragmentHomeBinding = binding
+//        val binding = FragmentHomeBinding.inflate(inflater, container, false)
+//        fragmentHomeBinding = binding
 
         fragmentHomeBinding?.homeTestBtn?.setOnClickListener(this)
+        fragmentHomeBinding?.homefragmentUploadBtn?.setOnClickListener(this)
+
         homeViewModel = ViewModelProvider(this).get(HomeViewModel::class.java)
         subscribeObservers()
         return  fragmentHomeBinding!!.root
@@ -54,6 +61,15 @@ class HomeFragment : Fragment(), View.OnClickListener {
 
     var testInt: Int = 1;
     override fun onClick(v: View?) {
+
+        when(v?.id){
+            R.id.home_test_btn ->{
+
+            }
+            R.id.homefragment_upload_btn->{
+
+            }
+        }
         testInt++
         homeViewModel.setInt(testInt)
     }
@@ -65,7 +81,7 @@ class HomeFragment : Fragment(), View.OnClickListener {
     }
 
     override fun onDestroy() {
-        fragmentHomeBinding = null
+//        fragmentHomeBinding = null
         super.onDestroy()
     }
 }
