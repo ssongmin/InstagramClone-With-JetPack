@@ -9,14 +9,15 @@ import androidx.navigation.ui.NavigationUI
 import com.example.instagramclone.databinding.ActivityMainBinding
 import com.example.instagramclone.viewmodel.HomeViewModel
 
-class MainActivity : AppCompatActivity() {
+class MainActivity : AppCompatActivity(R.layout.activity_main) {
 
-    private lateinit var mainBinding : ActivityMainBinding
+//    private lateinit var mainBinding : ActivityMainBinding
+    private val mainBinding by viewBindings(ActivityMainBinding::bind)
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        mainBinding = ActivityMainBinding.inflate(layoutInflater)
+//        mainBinding = ActivityMainBinding.inflate(layoutInflater)
 
         setContentView(mainBinding.root)
 
