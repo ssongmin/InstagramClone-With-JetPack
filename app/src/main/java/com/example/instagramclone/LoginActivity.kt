@@ -11,15 +11,16 @@ import com.example.instagramclone.databinding.ActivityMainBinding
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
 
-class LoginActivity : AppCompatActivity(), View.OnClickListener {
+class LoginActivity : AppCompatActivity(R.layout.activity_login), View.OnClickListener {
 
     var auth : FirebaseAuth? = null
-    private var mBinding : ActivityLoginBinding? = null
+//    private var mBinding : ActivityLoginBinding? = null
+    private val mBinding by viewBindings(ActivityLoginBinding::bind)
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        mBinding = ActivityLoginBinding.inflate(layoutInflater)
+//        mBinding = ActivityLoginBinding.inflate(layoutInflater)
         setContentView(mBinding!!.root)
 
         auth = FirebaseAuth.getInstance()
@@ -70,7 +71,6 @@ class LoginActivity : AppCompatActivity(), View.OnClickListener {
     }
 
     override fun onDestroy() {
-        mBinding = null
         super.onDestroy()
     }
 }

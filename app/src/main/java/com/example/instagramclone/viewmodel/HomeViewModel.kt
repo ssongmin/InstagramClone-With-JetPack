@@ -6,6 +6,7 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.instagramclone.model.PostDTO
+import com.example.instagramclone.model.fakes.fakePostItemList
 import com.example.instagramclone.repository.HomeRepositoryImpl
 import com.example.instagramclone.utils.Constants
 import kotlinx.coroutines.launch
@@ -33,13 +34,16 @@ class HomeViewModel : ViewModel() {
     }
 
     fun getPostList() {
-        viewModelScope.launch {
-            val homeRepositoryImpl: HomeRepositoryImpl = HomeRepositoryImpl()
-            val postList = homeRepositoryImpl.getPostList()
-            withContext(Main) {
-                _postList.value= postList.value
-            }
-        }
+
+        _postList.value = fakePostItemList
+
+//        viewModelScope.launch {
+//            val homeRepositoryImpl: HomeRepositoryImpl = HomeRepositoryImpl()
+//            val postList = homeRepositoryImpl.getPostList()
+//            withContext(Main) {
+//                _postList.value= postList.value
+//            }
+//        }
     }
 
 }

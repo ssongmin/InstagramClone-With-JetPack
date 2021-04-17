@@ -1,4 +1,4 @@
-package com.example.instagramclone.navigation
+package com.example.instagramclone.ui
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment

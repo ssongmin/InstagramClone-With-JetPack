@@ -10,6 +10,9 @@ data class PostDTO (
     @SerializedName("id")
     @Expose
     public val user_profile_image: String? = null,
+    @SerializedName("post_image")
+    @Expose
+    public val post_image: String? = null,
     @SerializedName("post_content")
     @Expose
     public val post_content: String? = null,

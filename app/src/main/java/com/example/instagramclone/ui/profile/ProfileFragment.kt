@@ -1,4 +1,4 @@
-package com.example.instagramclone.navigation
+package com.example.instagramclone.ui.profile
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment
@@ -19,18 +19,8 @@ class ProfileFragment : Fragment(R.layout.fragment_profile) {
 //    private var fragmentProfileBinding : FragmentProfileBinding? = null
     private val fragmentProfileBinding by viewBindings(FragmentProfileBinding::bind)
 
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
 
-    override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View? {
-//        return inflater.inflate(R.layout.fragment_profile, container, false)
-
-//        val binding = FragmentProfileBinding.inflate(inflater, container, false)
-//        fragmentProfileBinding = binding
-
-
-        return  fragmentProfileBinding!!.root
     }
 
     override fun onDestroy() {

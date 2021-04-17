@@ -1,4 +1,4 @@
-package com.example.instagramclone.navigation
+package com.example.instagramclone.ui.search
 
 import android.os.Bundle
 import android.util.Log
@@ -91,7 +91,7 @@ class SearchFragment : Fragment(R.layout.fragment_search) {
 
     companion object {
 
-        fun newInstance(): SearchFragment{
+        fun newInstance(): SearchFragment {
             return  SearchFragment()
         }
 
