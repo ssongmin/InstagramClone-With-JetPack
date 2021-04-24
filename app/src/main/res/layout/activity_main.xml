@@ -25,7 +25,7 @@
         android:layout_height="wrap_content"
         android:id="@+id/main_bottom_nav"
         app:menu="@menu/bottom_nav_menu"
-
+        
         app:labelVisibilityMode="unlabeled"
         />
 
