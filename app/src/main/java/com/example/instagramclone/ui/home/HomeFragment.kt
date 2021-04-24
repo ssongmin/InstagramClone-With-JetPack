@@ -3,9 +3,7 @@ package com.example.instagramclone.ui.home
 import android.os.Bundle
 import android.util.Log
 import androidx.fragment.app.Fragment
-import android.view.LayoutInflater
 import android.view.View
-import android.view.ViewGroup
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -13,7 +11,6 @@ import com.example.instagramclone.R
 import com.example.instagramclone.databinding.FragmentHomeBinding
 import com.example.instagramclone.utils.Constants.TAG
 import com.example.instagramclone.viewBindings
-import com.example.instagramclone.viewmodel.HomeViewModel
 
 class HomeFragment : Fragment(R.layout.fragment_home), View.OnClickListener {
 //    private var fragmentHomeBinding: FragmentHomeBinding? = null;
@@ -36,8 +33,8 @@ class HomeFragment : Fragment(R.layout.fragment_home), View.OnClickListener {
         fragmentHomeBinding.homefragmentUploadBtn?.setOnClickListener(this)
 
         fragmentHomeBinding.homeMainRecycler?.run {
-            var lineartManager = LinearLayoutManager(context)
-            layoutManager = lineartManager
+            var linearManager = LinearLayoutManager(context)
+            layoutManager = linearManager
 
             homeAdapter = HomeAdapter(context)
             adapter = homeAdapter

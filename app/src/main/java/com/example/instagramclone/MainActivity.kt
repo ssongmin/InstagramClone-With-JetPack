@@ -2,17 +2,18 @@ package com.example.instagramclone
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import androidx.activity.viewModels
-import androidx.fragment.app.viewModels
-import androidx.navigation.fragment.NavHostFragment
-import androidx.navigation.ui.NavigationUI
+import androidx.lifecycle.LiveData
+import androidx.navigation.NavController
+import androidx.navigation.ui.setupWithNavController
 import com.example.instagramclone.databinding.ActivityMainBinding
-import com.example.instagramclone.viewmodel.HomeViewModel
+import com.google.android.material.bottomnavigation.BottomNavigationView
 
 class MainActivity : AppCompatActivity(R.layout.activity_main) {
 
-//    private lateinit var mainBinding : ActivityMainBinding
+    //    private lateinit var mainBinding : ActivityMainBinding
     private val mainBinding by viewBindings(ActivityMainBinding::bind)
+
+    private var currentNavController: LiveData<NavController>? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -20,15 +21,42 @@ class MainActivity : AppCompatActivity(R.layout.activity_main) {
 //        mainBinding = ActivityMainBinding.inflate(layoutInflater)
 
         setContentView(mainBinding.root)
+        if (savedInstanceState == null) {
+            setupBottomNavigationBar()
+        }
 
-        var navHostFramgnet = supportFragmentManager.findFragmentById(R.id.main_nav_host) as NavHostFragment
-
-        var navController = navHostFramgnet.navController
-
-        NavigationUI.setupWithNavController(mainBinding.mainBottomNav, navController)
     }
 
-    override fun onDestroy() {
-        super.onDestroy()
+    override fun onRestoreInstanceState(savedInstanceState: Bundle) {
+        super.onRestoreInstanceState(savedInstanceState)
+
+        setupBottomNavigationBar()
+    }
+
+    private fun setupBottomNavigationBar() {
+//        var navHostFramgnet = supportFragmentManager.findFragmentById(R.id.main_nav_host) as NavHostFragment
+//
+//        var navController = navHostFramgnet.navController
+//        NavigationUI.setupWithNavController(mainBinding.mainBottomNav, navController)
+
+        val bottomNavigationView: BottomNavigationView = mainBinding.mainBottomNav
+//        val bottomNavigationView = findViewById<BottomNavigationItemView>(R.id.main_bottom_nav)
+
+        val navGraphIds = listOf(
+            R.navigation.home,
+            R.navigation.search,
+            R.navigation.reels,
+            R.navigation.shop,
+            R.navigation.profile
+        )
+
+        bottomNavigationView.setupWithNavController(
+
+        )
+
+    }
+
+    override fun onSupportNavigateUp(): Boolean {
+        return currentNavController?.value?.navigateUp() ?: false
     }
 }

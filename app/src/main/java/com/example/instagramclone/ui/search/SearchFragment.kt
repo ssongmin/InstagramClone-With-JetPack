@@ -3,15 +3,13 @@ package com.example.instagramclone.ui.search
 import android.os.Bundle
 import android.util.Log
 import androidx.fragment.app.Fragment
-import android.view.LayoutInflater
 import android.view.View
-import android.view.ViewGroup
 import androidx.lifecycle.ViewModelProvider
+import androidx.recyclerview.widget.GridLayoutManager
 import com.example.instagramclone.R
 import com.example.instagramclone.databinding.FragmentSearchBinding
 import com.example.instagramclone.utils.Constants.TAG
 import com.example.instagramclone.viewBindings
-import com.example.instagramclone.viewmodel.SearchViewModel
 import com.jakewharton.rxbinding4.widget.textChanges
 import io.reactivex.rxjava3.disposables.CompositeDisposable
 import io.reactivex.rxjava3.disposables.Disposable
@@ -26,22 +24,12 @@ class SearchFragment : Fragment(R.layout.fragment_search) {
 
 
     private lateinit var searchViewModel: SearchViewModel
+    private lateinit var searchAdapter: SearchAdapter
 
     //옵저버블 제거를 위해서
     private var myCompositeDisposable = CompositeDisposable()
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-
-    }
-
-    override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View? {
-        // Inflate the layout for this fragment
-//        val binding =  FragmentSearchBinding.inflate(inflater, container, false)
-//        fragmentSearchBinding = binding;
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
 
         searchViewModel = ViewModelProvider(this).get(SearchViewModel::class.java)
         //Rx
@@ -61,20 +49,28 @@ class SearchFragment : Fragment(R.layout.fragment_search) {
                         Log.e(TAG, "onCreateView:  onComplete",)
                     },
                     onError = {
-                        Log.e(TAG, "onCreateView: onError", )
+                        Log.e(TAG, "onCreateView: onError ${it.toString()}", )
                     },
                 )
+
+        fragmentSearchBinding.searchMainRecycler?.run {
+            var gridLayoutManager = GridLayoutManager(context, 3)
+            layoutManager = gridLayoutManager
+            searchAdapter = SearchAdapter(context)
+
+            adapter = searchAdapter
+        }
 
 
         subscribeObservers()
         myCompositeDisposable.add(searchEditTextSubscription)
-        return  fragmentSearchBinding!!.root
     }
 
     private fun subscribeObservers() {
         searchViewModel.postList.observe(viewLifecycleOwner, {
             Log.e(TAG, "subscribeObservers: ${it.toString()}", )
             Log.e(TAG, "subscribeObservers: ${it.size}",)
+            searchAdapter.setData(it)
         })
     }
 

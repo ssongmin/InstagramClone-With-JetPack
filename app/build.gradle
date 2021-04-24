@@ -57,9 +57,11 @@ dependencies {
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.3.0'
 
     def nav_version = "2.3.2"
+//    def nav_version = "1.2.0"
     // Kotlin
     implementation "androidx.navigation:navigation-fragment-ktx:$nav_version"
     implementation "androidx.navigation:navigation-ui-ktx:$nav_version"
+    implementation "androidx.navigation:navigation-runtime-ktx:$nav_version"
 
     // 레트로핏
     def retrofit_version = "2.8.1"
