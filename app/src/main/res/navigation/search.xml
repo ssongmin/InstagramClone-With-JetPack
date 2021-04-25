@@ -1,5 +1,25 @@
 <?xml version="1.0" encoding="utf-8"?>
 <navigation xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto" android:id="@+id/search">
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/search"
+    app:startDestination="@id/searchPost">
 
+    <fragment
+        android:id="@+id/searchPost"
+        android:name="com.example.instagramclone.ui.search.SearchFragment"
+        android:label="Search"
+        tools:layout="@layout/fragment_search">
+        <action
+            android:id="@+id/action_searchMain_to_postList"
+            app:destination="@id/postList"
+            />
+    </fragment>
+
+    <fragment
+        android:id="@+id/postList"
+        android:name="com.example.instagramclone.ui.home.HomeFragment"
+        android:label="PostList"
+        tools:layout="@layout/fragment_home"
+        />
 </navigation>

@@ -4,8 +4,10 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import androidx.lifecycle.LiveData
 import androidx.navigation.NavController
+import androidx.navigation.ui.setupActionBarWithNavController
 import androidx.navigation.ui.setupWithNavController
 import com.example.instagramclone.databinding.ActivityMainBinding
+import com.example.instagramclone.utils.setupWithNavController
 import com.google.android.material.bottomnavigation.BottomNavigationView
 
 class MainActivity : AppCompatActivity(R.layout.activity_main) {
@@ -50,10 +52,18 @@ class MainActivity : AppCompatActivity(R.layout.activity_main) {
             R.navigation.profile
         )
 
-        bottomNavigationView.setupWithNavController(
-
+        val controller = bottomNavigationView.setupWithNavController(
+            navGraphIds = navGraphIds,
+            fragmentManager = supportFragmentManager,
+            containerId = R.id.main_nav_host,
+            intent = intent
         )
 
+        controller.observe(this, {navController ->
+            setupActionBarWithNavController(navController)
+        })
+
+        currentNavController = controller
     }
 
     override fun onSupportNavigateUp(): Boolean {

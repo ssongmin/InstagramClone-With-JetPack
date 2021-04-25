@@ -2,12 +2,13 @@ package com.example.instagramclone.ui.search
 
 import android.content.Context
 import android.view.LayoutInflater
+import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.example.instagramclone.R
 import com.example.instagramclone.model.PostDTO
 
-class SearchAdapter(context: Context) : RecyclerView.Adapter<SearchViewHolder>() {
+class SearchAdapter(context: Context) : RecyclerView.Adapter<SearchViewHolder>(), SearchViewHolder.OnSearchViewHolderListener {
 
     var context: Context = context
 
@@ -25,7 +26,9 @@ class SearchAdapter(context: Context) : RecyclerView.Adapter<SearchViewHolder>()
     override fun onBindViewHolder(holder: SearchViewHolder, position: Int) {
         datas?.let {
             holder.bind(it[position])
+            holder.setViewHolderListener(this)
         }
+
     }
 
     override fun getItemCount(): Int {
@@ -40,5 +43,21 @@ class SearchAdapter(context: Context) : RecyclerView.Adapter<SearchViewHolder>()
     fun addData(data: List<PostDTO>) {
         this.datas!!.addAll(data)
         notifyDataSetChanged()
+    }
+
+    override fun onSearchViewHolderClick(view: View, data: PostDTO) {
+        listener?.let {
+            it.onSearchViewClick(view, data)
+        }
+    }
+
+    interface OnSearchViewAdapterListener{
+        fun onSearchViewClick(view: View, data: PostDTO)
+    }
+
+    var listener: OnSearchViewAdapterListener? = null
+
+    fun setAdapterListener(listener: OnSearchViewAdapterListener){
+        this.listener = listener
     }
 }
