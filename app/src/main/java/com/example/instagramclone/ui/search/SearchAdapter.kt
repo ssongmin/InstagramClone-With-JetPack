@@ -15,12 +15,12 @@ class SearchAdapter(context: Context) : RecyclerView.Adapter<SearchViewHolder>()
     private var datas: MutableList<PostDTO>? = null
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): SearchViewHolder {
-        val viewHolder = SearchViewHolder(
-            LayoutInflater.from(parent.context)
-                .inflate(R.layout.item_layout_search_post, parent, false), context
-        )
+//        val viewHolder = SearchViewHolder(
+//            LayoutInflater.from(parent.context)
+//                .inflate(R.layout.item_layout_search_post, parent, false), context
+//        )
 
-        return viewHolder
+        return SearchViewHolder.create(parent)
     }
 
     override fun onBindViewHolder(holder: SearchViewHolder, position: Int) {

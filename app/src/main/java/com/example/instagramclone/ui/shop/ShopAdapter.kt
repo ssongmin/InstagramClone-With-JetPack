@@ -15,11 +15,11 @@ class ShopAdapter(context: Context) : RecyclerView.Adapter<ShopViewHolder>() {
     private var datas: MutableList<ShopDTO>? = null
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ShopViewHolder {
-        val viewHolder = ShopViewHolder(
-            LayoutInflater.from(parent.context)
-                .inflate(R.layout.item_layout_shop_product, parent, false), context
-        )
-        return viewHolder
+//        val viewHolder = ShopViewHolder(
+//            LayoutInflater.from(parent.context)
+//                .inflate(R.layout.item_layout_shop_product, parent, false), context
+//        )
+        return ShopViewHolder.create(parent)
     }
 
     override fun onBindViewHolder(holder: ShopViewHolder, position: Int) {

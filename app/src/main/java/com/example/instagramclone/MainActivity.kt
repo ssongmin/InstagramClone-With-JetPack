@@ -1,5 +1,7 @@
 package com.example.instagramclone
 
+import android.content.Context
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import androidx.lifecycle.LiveData
@@ -68,5 +70,13 @@ class MainActivity : AppCompatActivity(R.layout.activity_main) {
 
     override fun onSupportNavigateUp(): Boolean {
         return currentNavController?.value?.navigateUp() ?: false
+    }
+
+
+    companion object {
+        fun intentFor(context: Context): Intent {
+            val intent = Intent(context, MainActivity::class.java)
+            return intent
+        }
     }
 }

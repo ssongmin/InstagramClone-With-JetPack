@@ -65,7 +65,8 @@ class LoginActivity : AppCompatActivity(R.layout.activity_login), View.OnClickLi
 
     private fun moveMainPage(user: FirebaseUser?){
         if(user != null){
-            startActivity(Intent(this, MainActivity::class.java))
+//            startActivity(Intent(this, MainActivity::class.java))
+            startActivity(MainActivity.intentFor(this))
             finish()
         }
     }
