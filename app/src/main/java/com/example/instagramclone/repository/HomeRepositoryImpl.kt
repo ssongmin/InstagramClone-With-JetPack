@@ -17,7 +17,8 @@ import retrofit2.Response
 
 class HomeRepositoryImpl constructor() : HomeRepository {
     override suspend fun getPostList(): MutableLiveData<List<PostDTO>> {
-//        var testList: List<PostDTO> = mutableListOf(PostDTO())
+//        var testList: List<Post
+//        DTO> = mutableListOf(PostDTO())
 //        return testList
 //        val data: MutableLiveData<List<PostDTO>> = MutableLiveData<List<PostDTO>>()
         var data: MutableLiveData<List<PostDTO>> = MutableLiveData<List<PostDTO>>()

@@ -1,15 +1,29 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+
+<layout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
     tools:context=".ui.profile.ProfileFragment">
+
+    <data>
+        <variable
+            name="viewmodel"
+            type="com.example.instagramclone.viewmodel.ProfileViewModel" />
+    </data>
+<FrameLayout
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
 
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical">
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/time_test"
+            android:text="@{Long.toString(viewmodel.currentTime)}"/>
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -66,3 +80,4 @@
     </LinearLayout>
 
 </FrameLayout>
+</layout>
