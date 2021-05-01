@@ -14,12 +14,12 @@ class HomeAdapter(context: Context) : RecyclerView.Adapter<HomeViewHolder>() {
     private var datas : List<PostDTO>? = null
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): HomeViewHolder {
-        val viewHolder = HomeViewHolder(
-            LayoutInflater.from(parent.context).inflate(R.layout.item_layout_home_post, parent, false)
-            ,context
-        )
+//        val viewHolder = HomeViewHolder(
+//            LayoutInflater.from(parent.context).inflate(R.layout.item_layout_home_post, parent, false)
+//            ,context
+//        )
 
-        return viewHolder
+        return HomeViewHolder.create(parent)
     }
 
     override fun onBindViewHolder(holder: HomeViewHolder, position: Int) {

@@ -1,4 +1,4 @@
-package com.example.instagramclone.viewmodel
+package com.example.instagramclone.ui.home
 
 import android.util.Log
 import androidx.lifecycle.LiveData

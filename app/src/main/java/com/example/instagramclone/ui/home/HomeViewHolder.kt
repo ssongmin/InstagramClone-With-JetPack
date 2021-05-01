@@ -1,9 +1,12 @@
 package com.example.instagramclone.ui.home
 
 import android.content.Context
+import android.view.LayoutInflater
 import android.view.View
+import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
+import com.example.instagramclone.R
 import com.example.instagramclone.model.PostDTO
 import kotlinx.android.synthetic.main.item_layout_home_post.view.*
 
@@ -23,5 +26,12 @@ class HomeViewHolder(itemView: View, context: Context) : RecyclerView.ViewHolder
         Glide.with(context!!).load(data.post_image).into(itemView.item_home_content_image)
     }
 
+    companion object {
+        fun create(parent: ViewGroup): HomeViewHolder {
+            val view = LayoutInflater.from(parent.context)
+                .inflate(R.layout.item_layout_home_post, parent, false)
+            return HomeViewHolder(view, parent.context)
+        }
+    }
 
 }
